@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Safe Spaces – Mental Health & Wellbeing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --sage: #7C9E8C;
+    --sage-light: #A8C4B4;
+    --sage-dark: #4A7060;
+    --cream: #F5F0E8;
+    --warm-white: #FDFAF5;
+    --charcoal: #2C2C2C;
+    --warm-gray: #6B6460;
+    --accent: #C4956A;
+    --accent-light: #E8C4A0;
+    --deep-green: #1E3D30;
+    --soft-green: #EEF4F0;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;color:var(--charcoal);background:var(--warm-white);overflow-x:hidden}
+
+  /* ===== NAV ===== */
+  nav{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(253,250,245,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(124,158,140,0.15);transition:.3s}
+  .nav-inner{max-width:1300px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;cursor:pointer}
+  .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--deep-green);letter-spacing:.02em}
+  .logo-sub{font-size:.65rem;font-weight:300;color:var(--sage);text-transform:uppercase;letter-spacing:.15em;display:block;margin-top:-4px}
+  .nav-links{display:flex;align-items:center;gap:0;list-style:none}
+  .nav-links li{position:relative}
+  .nav-links a{display:block;padding:.5rem 1.1rem;font-size:.82rem;font-weight:400;color:var(--warm-gray);text-decoration:none;letter-spacing:.03em;text-transform:uppercase;transition:.2s;cursor:pointer}
+  .nav-links a:hover,.nav-links a.active{color:var(--sage-dark)}
+  .dropdown{position:absolute;top:100%;left:0;background:var(--warm-white);border:1px solid rgba(124,158,140,0.2);border-radius:8px;min-width:200px;opacity:0;pointer-events:none;transform:translateY(8px);transition:.2s;box-shadow:0 16px 40px rgba(0,0,0,.08)}
+  .nav-links li:hover .dropdown{opacity:1;pointer-events:all;transform:translateY(0)}
+  .dropdown a{padding:.6rem 1.2rem;font-size:.8rem;text-transform:none;color:var(--charcoal);border-bottom:1px solid rgba(124,158,140,.1)}
+  .dropdown a:last-child{border-bottom:none}
+  .nav-cta{background:var(--sage-dark);color:#fff!important;padding:.5rem 1.3rem!important;border-radius:40px;font-size:.78rem!important;letter-spacing:.08em!important;transition:.25s!important}
+  .nav-cta:hover{background:var(--deep-green)!important;color:#fff!important}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--charcoal);transition:.3s}
+  .mobile-menu{display:none;position:fixed;top:72px;left:0;width:100%;background:var(--warm-white);border-top:1px solid rgba(124,158,140,.15);padding:1.5rem 2rem 2rem;z-index:999;max-height:calc(100vh - 72px);overflow-y:auto}
+  .mobile-menu.open{display:block}
+  .mobile-menu a{display:block;padding:.7rem 0;font-size:.9rem;color:var(--charcoal);text-decoration:none;border-bottom:1px solid rgba(124,158,140,.12);cursor:pointer}
+  .mobile-menu .sub-item{padding-left:1rem;font-size:.82rem;color:var(--warm-gray)}
+
+  /* ===== PAGES ===== */
+  .page{display:none;padding-top:72px;animation:fadeUp .5s ease both}
+  .page.active{display:block}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  /* ===== HERO ===== */
+  .hero{min-height:90vh;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--deep-green) 0%,#2E5C48 50%,var(--sage-dark) 100%)}
+  .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=80') center/cover no-repeat;opacity:.12}
+  .hero-texture{position:absolute;inset:0;background-image:radial-gradient(circle at 30% 70%,rgba(168,196,180,.15) 0%,transparent 60%),radial-gradient(circle at 80% 20%,rgba(196,149,106,.1) 0%,transparent 50%)}
+  .hero-content{position:relative;max-width:1300px;margin:0 auto;padding:6rem 2rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+  .hero-label{font-size:.72rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-light);margin-bottom:1.2rem}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1.05;color:#fff;margin-bottom:1rem}
+  .hero-title span{font-style:italic;color:var(--sage-light)}
+  .hero-sub{font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,.75);margin-bottom:2.5rem;font-weight:300;max-width:480px}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{display:inline-block;background:var(--accent);color:#fff;padding:.85rem 2rem;border-radius:40px;font-size:.85rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:.25s}
+  .btn-primary:hover{background:#b8845c;transform:translateY(-2px)}
+  .btn-outline{display:inline-block;border:1px solid rgba(255,255,255,.4);color:#fff;padding:.85rem 2rem;border-radius:40px;font-size:.85rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:.25s}
+  .btn-outline:hover{background:rgba(255,255,255,.1)}
+  .hero-image-wrap{position:relative}
+  .hero-image-wrap img{width:100%;height:520px;object-fit:cover;border-radius:16px;box-shadow:0 40px 80px rgba(0,0,0,.4)}
+  .hero-image-wrap::before{content:'';position:absolute;inset:-16px;border:1px solid rgba(168,196,180,.3);border-radius:24px;pointer-events:none}
+
+  /* ===== SECTION PATTERNS ===== */
+  .section{padding:6rem 2rem}
+  .container{max-width:1300px;margin:0 auto}
+  .section-label{font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:.8rem}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:400;line-height:1.2;color:var(--deep-green);margin-bottom:1.2rem}
+  .section-title em{font-style:italic;color:var(--sage-dark)}
+  .section-body{font-size:1rem;line-height:1.85;color:var(--warm-gray);max-width:680px}
+  .section-divider{width:60px;height:2px;background:var(--sage);margin:1.5rem 0}
+
+  /* ===== WELCOME SECTION ===== */
+  .welcome{background:var(--cream)}
+  .welcome-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+  .welcome-img{width:100%;height:500px;object-fit:cover;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.1)}
+  .welcome-img-wrap{position:relative}
+  .welcome-badge{position:absolute;bottom:-20px;right:-20px;background:var(--deep-green);color:#fff;padding:1.5rem;border-radius:12px;text-align:center}
+  .welcome-badge span{display:block;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600}
+  .welcome-badge small{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+
+  /* ===== SERVICES GRID ===== */
+  .services{background:var(--warm-white)}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+  .service-card{background:var(--cream);border-radius:12px;overflow:hidden;transition:.3s;cursor:pointer}
+  .service-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.1)}
+  .service-card img{width:100%;height:220px;object-fit:cover}
+  .service-card-body{padding:1.5rem}
+  .service-card-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500;color:var(--deep-green);margin-bottom:.5rem}
+  .service-card-text{font-size:.88rem;line-height:1.7;color:var(--warm-gray)}
+  .service-card-link{display:inline-block;margin-top:1rem;font-size:.78rem;font-weight:500;color:var(--sage-dark);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;border-bottom:1px solid var(--sage-light)}
+
+  /* ===== THERAPY PROCESS ===== */
+  .process{background:var(--deep-green);color:#fff}
+  .process .section-title{color:#fff}
+  .process .section-label{color:var(--sage-light)}
+  .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem}
+  .process-step{padding:1.5rem;border:1px solid rgba(168,196,180,.2);border-radius:12px;transition:.3s;background:rgba(255,255,255,.04)}
+  .process-step:hover{background:rgba(255,255,255,.08)}
+  .step-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--sage-light);opacity:.4;line-height:1;margin-bottom:.8rem}
+  .step-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;color:#fff;margin-bottom:.5rem}
+  .step-text{font-size:.85rem;line-height:1.7;color:rgba(255,255,255,.65)}
+  .therapy-list{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  .therapy-item{border-left:2px solid var(--sage);padding:1.2rem 1.5rem;background:rgba(255,255,255,.05);border-radius:0 8px 8px 0}
+  .therapy-item h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;color:var(--sage-light);margin-bottom:.4rem}
+  .therapy-item p{font-size:.85rem;line-height:1.7;color:rgba(255,255,255,.65)}
+
+  /* ===== BLOG CARDS ===== */
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+  .blog-card{border-radius:12px;overflow:hidden;background:var(--cream);transition:.3s;cursor:pointer}
+  .blog-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
+  .blog-card img{width:100%;height:200px;object-fit:cover}
+  .blog-card-body{padding:1.4rem}
+  .blog-tag{font-size:.7rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);margin-bottom:.5rem}
+  .blog-card-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;color:var(--deep-green);margin-bottom:.5rem;line-height:1.3}
+  .blog-card-text{font-size:.85rem;line-height:1.6;color:var(--warm-gray)}
+  .read-more{display:inline-block;margin-top:.8rem;font-size:.75rem;color:var(--sage-dark);font-weight:500;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid currentColor;cursor:pointer}
+
+  /* ===== PAGE HERO BANNER ===== */
+  .page-banner{background:linear-gradient(135deg,var(--deep-green),var(--sage-dark));padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+  .page-banner::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=1600&q=80') center/cover;opacity:.08}
+  .page-banner-content{position:relative;max-width:700px;margin:0 auto}
+  .page-banner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:400;color:#fff;line-height:1.15;margin-bottom:1rem}
+  .page-banner p{font-size:1rem;line-height:1.8;color:rgba(255,255,255,.75);font-weight:300}
+
+  /* ===== ABOUT DETAILS ===== */
+  .about-grid{display:grid;grid-template-columns:380px 1fr;gap:4rem;align-items:start}
+  .about-sidebar-img{width:100%;height:450px;object-fit:cover;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.1);position:sticky;top:100px}
+  .credential-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+  .credential-item{background:var(--soft-green);padding:1rem 1.2rem;border-radius:8px;border-left:3px solid var(--sage)}
+  .credential-item h5{font-size:.78rem;font-weight:600;color:var(--sage-dark);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.2rem}
+  .credential-item p{font-size:.85rem;color:var(--charcoal)}
+  .expertise-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem}
+  .tag{background:var(--sage-light);color:var(--deep-green);padding:.35rem .9rem;border-radius:30px;font-size:.78rem;font-weight:500}
+  .research-card{background:var(--cream);border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
+  .research-card img{width:100%;height:180px;object-fit:cover}
+  .research-card-body{padding:1.2rem}
+  .research-card-body h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;color:var(--deep-green);margin-bottom:.4rem}
+  .research-card-body p{font-size:.85rem;line-height:1.6;color:var(--warm-gray)}
+
+  /* ===== FACILITIES ===== */
+  .facility-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+  .facility-card{border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.07);transition:.3s;cursor:pointer}
+  .facility-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,.12)}
+  .facility-card img{width:100%;height:260px;object-fit:cover}
+  .facility-card-body{padding:2rem;background:#fff}
+  .facility-card-body h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--deep-green);margin-bottom:.8rem}
+  .facility-card-body p{font-size:.88rem;line-height:1.75;color:var(--warm-gray)}
+  .facility-cta{display:inline-block;margin-top:1.2rem;background:var(--sage-dark);color:#fff;padding:.6rem 1.4rem;border-radius:30px;font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:none;transition:.2s}
+  .facility-cta:hover{background:var(--deep-green)}
+
+  /* ===== ASSESS TYPES ===== */
+  .assess-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+  .assess-card{background:var(--warm-white);border:1px solid rgba(124,158,140,.2);border-radius:12px;padding:1.8rem;transition:.3s}
+  .assess-card:hover{border-color:var(--sage);background:var(--soft-green)}
+  .assess-card img{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:1rem}
+  .assess-card h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;color:var(--deep-green);margin-bottom:.4rem}
+  .assess-card p{font-size:.83rem;line-height:1.65;color:var(--warm-gray)}
+
+  /* ===== THERAPY CONDITIONS ===== */
+  .conditions-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
+  .condition-pill{background:var(--soft-green);border:1px solid rgba(124,158,140,.25);border-radius:8px;padding:1rem 1.2rem;text-align:center;transition:.25s;cursor:default}
+  .condition-pill:hover{background:var(--sage-light);border-color:var(--sage)}
+  .condition-pill h5{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:500;color:var(--deep-green);margin-bottom:.3rem}
+  .condition-pill p{font-size:.75rem;line-height:1.5;color:var(--warm-gray)}
+
+  /* ===== INTERVENTIONS ===== */
+  .interventions-list{display:flex;flex-direction:column;gap:2rem;margin-top:2rem}
+  .intervention-item{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;background:var(--cream);border-radius:12px;overflow:hidden}
+  .intervention-item.reverse{direction:rtl}
+  .intervention-item.reverse > *{direction:ltr}
+  .intervention-item img{width:100%;height:240px;object-fit:cover}
+  .intervention-body{padding:2rem}
+  .intervention-body h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--deep-green);margin-bottom:.8rem}
+  .intervention-body p{font-size:.9rem;line-height:1.8;color:var(--warm-gray)}
+
+  /* ===== FAQ ===== */
+  .faq-list{margin-top:2rem;display:flex;flex-direction:column;gap:1rem}
+  .faq-item{background:var(--cream);border-radius:10px;padding:1.2rem 1.5rem;cursor:pointer;transition:.2s}
+  .faq-item:hover{background:var(--soft-green)}
+  .faq-q{font-weight:500;color:var(--deep-green);font-size:.95rem;display:flex;justify-content:space-between;align-items:center}
+  .faq-q::after{content:'+';font-size:1.2rem;color:var(--sage);flex-shrink:0;margin-left:1rem;transition:.25s}
+  .faq-item.open .faq-q::after{transform:rotate(45deg)}
+  .faq-a{font-size:.88rem;line-height:1.7;color:var(--warm-gray);margin-top:.6rem;max-height:0;overflow:hidden;transition:.3s}
+  .faq-item.open .faq-a{max-height:200px}
+
+  /* ===== OUTREACH ===== */
+  .outreach-ways{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.5rem}
+  .outreach-way{background:var(--cream);border-radius:12px;padding:2rem 1.5rem;text-align:center;border-top:3px solid var(--sage);transition:.3s}
+  .outreach-way:hover{background:var(--soft-green);transform:translateY(-4px)}
+  .outreach-way img{width:80px;height:80px;object-fit:cover;border-radius:50%;margin:0 auto 1rem}
+  .outreach-way h4{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--deep-green);margin-bottom:.5rem}
+  .outreach-way p{font-size:.85rem;line-height:1.6;color:var(--warm-gray)}
+  .awareness-list{margin-top:1.5rem;display:flex;flex-direction:column;gap:.8rem}
+  .awareness-list li{display:flex;align-items:start;gap:.8rem;font-size:.9rem;line-height:1.6;color:var(--warm-gray)}
+  .awareness-list li::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--sage);flex-shrink:0;margin-top:8px}
+
+  /* ===== INSIGHTS ===== */
+  .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+  .testimonial-card{background:var(--cream);border-radius:12px;padding:1.8rem;border-top:3px solid var(--sage-light);position:relative}
+  .testimonial-card::before{content:'\201C';font-family:'Cormorant Garamond',serif;font-size:5rem;color:var(--sage-light);position:absolute;top:-10px;left:1.2rem;line-height:1;opacity:.5}
+  .testimonial-text{font-size:.9rem;line-height:1.8;color:var(--charcoal);font-style:italic;margin-top:1rem}
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+  .gallery-grid img{width:100%;height:200px;object-fit:cover;border-radius:8px;transition:.3s}
+  .gallery-grid img:hover{transform:scale(1.03)}
+
+  /* ===== CONTACT ===== */
+  .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;margin-top:3rem}
+  .contact-info h3{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--deep-green);margin-bottom:2rem;font-weight:400}
+  .contact-detail{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:start}
+  .contact-detail-icon{width:44px;height:44px;background:var(--soft-green);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .contact-detail-icon img{width:22px;height:22px;object-fit:contain;opacity:.7}
+  .contact-detail h5{font-size:.75rem;font-weight:600;color:var(--sage);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem}
+  .contact-detail p{font-size:.88rem;line-height:1.6;color:var(--charcoal)}
+  .contact-form{background:var(--cream);border-radius:16px;padding:2.5rem}
+  .contact-form h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--deep-green);margin-bottom:1.5rem;font-weight:400}
+  .form-group{margin-bottom:1.2rem}
+  .form-group label{display:block;font-size:.78rem;font-weight:500;color:var(--warm-gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+  .form-group input,.form-group textarea,.form-group select{width:100%;padding:.75rem 1rem;background:#fff;border:1px solid rgba(124,158,140,.3);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--charcoal);outline:none;transition:.2s}
+  .form-group input:focus,.form-group textarea:focus{border-color:var(--sage)}
+  .form-group textarea{resize:vertical;min-height:120px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .map-wrap{margin-top:3rem;border-radius:12px;overflow:hidden;height:300px}
+  .map-wrap iframe{width:100%;height:100%;border:none}
+
+  /* ===== VISION ===== */
+  .vision-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem}
+  .vision-box{background:var(--cream);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .vision-box img{width:100%;height:280px;object-fit:cover}
+  .vision-box-body{padding:2rem;flex:1}
+  .vision-box-body h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--deep-green);margin-bottom:1rem}
+  .vision-highlight{background:var(--sage-dark);color:var(--sage-light);padding:.2em .5em;border-radius:4px;font-weight:500}
+
+  /* ===== ETHICS ===== */
+  .ethics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+  .ethics-card{background:var(--cream);border-radius:12px;overflow:hidden;padding-bottom:1.5rem}
+  .ethics-card img{width:100%;height:180px;object-fit:cover;margin-bottom:1.2rem}
+  .ethics-card-body{padding:0 1.5rem}
+  .ethics-card-body h4{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;color:var(--deep-green);margin-bottom:.6rem}
+  .ethics-card-body p{font-size:.87rem;line-height:1.75;color:var(--warm-gray)}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--deep-green);color:#fff;padding:4rem 2rem 2rem}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.5fr;gap:3rem;max-width:1300px;margin:0 auto}
+  .footer-brand p{font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.6);margin-top:1rem;max-width:280px}
+  .footer-col h5{font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--sage-light);margin-bottom:1.2rem}
+  .footer-col a{display:block;font-size:.88rem;color:rgba(255,255,255,.6);text-decoration:none;margin-bottom:.6rem;cursor:pointer;transition:.2s}
+  .footer-col a:hover{color:var(--sage-light)}
+  .footer-address p{font-size:.84rem;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:.6rem}
+  .social-links{display:flex;gap:.8rem;margin-top:1.2rem}
+  .social-links a{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:.8rem;text-decoration:none;cursor:pointer;transition:.2s}
+  .social-links a:hover{background:var(--sage);color:#fff}
+  .footer-bottom{max-width:1300px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center}
+  .footer-bottom p{font-size:.8rem;color:rgba(255,255,255,.45)}
+
+  /* ===== CTA STRIP ===== */
+  .cta-strip{background:linear-gradient(120deg,var(--accent),#b8845c);padding:4rem 2rem;text-align:center}
+  .cta-strip h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;color:#fff;margin-bottom:1rem}
+  .cta-strip p{font-size:1rem;color:rgba(255,255,255,.85);margin-bottom:2rem;max-width:540px;margin-left:auto;margin-right:auto}
+  .btn-white{background:#fff;color:var(--accent);padding:.85rem 2.2rem;border-radius:40px;font-size:.85rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:.25s;display:inline-block}
+  .btn-white:hover{background:var(--cream)}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:1024px){
+    .hero-content,.welcome-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+    .about-sidebar-img{position:static;height:350px}
+    .hero-image-wrap{display:none}
+    .services-grid,.blog-grid{grid-template-columns:1fr 1fr}
+    .process-steps,.conditions-grid{grid-template-columns:1fr 1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .interventions-list .intervention-item{grid-template-columns:1fr}
+    .intervention-item.reverse{direction:ltr}
+    .therapy-list{grid-template-columns:1fr}
+  }
+  @media(max-width:768px){
+    .nav-links,.nav-cta{display:none}
+    .hamburger{display:flex}
+    .services-grid,.blog-grid,.assess-grid,.facility-cards,.outreach-ways,.testimonials-grid,.ethics-grid,.vision-grid,.credential-grid,.gallery-grid{grid-template-columns:1fr}
+    .conditions-grid{grid-template-columns:1fr 1fr}
+    .process-steps{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;gap:.5rem;text-align:center}
+    .form-row{grid-template-columns:1fr}
+    .hero-content{padding:4rem 1.5rem 3rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a class="logo" onclick="navigate('home')">
+      <div>
+        <span class="logo-text">Safe Spaces</span>
+        <span class="logo-sub">Mental Health & Wellbeing</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a onclick="navigate('home')" id="nav-home">Home</a></li>
+      <li>
+        <a onclick="navigate('about')" id="nav-about">About ▾</a>
+        <div class="dropdown">
+          <a onclick="navigate('about')">About Safe Spaces</a>
+          <a onclick="navigate('vision')">Our Vision</a>
+          <a onclick="navigate('ethics')">Work Ethics</a>
+        </div>
+      </li>
+      <li>
+        <a onclick="navigate('facilities')" id="nav-facilities">Facilities ▾</a>
+        <div class="dropdown">
+          <a onclick="navigate('facilities')">All Facilities</a>
+          <a onclick="navigate('assessments')">Psychological Assessments</a>
+          <a onclick="navigate('counseling')">Psychotherapy & Counseling</a>
+          <a onclick="navigate('interventions')">Therapeutic Interventions</a>
+        </div>
+      </li>
+      <li><a onclick="navigate('resources')" id="nav-resources">Resources</a></li>
+      <li><a onclick="navigate('outreach')" id="nav-outreach">Community Outreach</a></li>
+      <li><a onclick="navigate('insights')" id="nav-insights">Insights</a></li>
+      <li><a onclick="navigate('contact')" id="nav-contact">Contact</a></li>
+      <li><a class="nav-cta" onclick="navigate('contact')">Book a Session</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="navigate('home');closeMobile()">Home</a>
+  <a onclick="navigate('about');closeMobile()">About Safe Spaces</a>
+  <a class="sub-item" onclick="navigate('vision');closeMobile()">— Our Vision</a>
+  <a class="sub-item" onclick="navigate('ethics');closeMobile()">— Work Ethics</a>
+  <a onclick="navigate('facilities');closeMobile()">Facilities</a>
+  <a class="sub-item" onclick="navigate('assessments');closeMobile()">— Psychological Assessments</a>
+  <a class="sub-item" onclick="navigate('counseling');closeMobile()">— Psychotherapy & Counseling</a>
+  <a class="sub-item" onclick="navigate('interventions');closeMobile()">— Therapeutic Interventions</a>
+  <a onclick="navigate('resources');closeMobile()">Resources</a>
+  <a onclick="navigate('outreach');closeMobile()">Community Outreach</a>
+  <a onclick="navigate('insights');closeMobile()">Insights</a>
+  <a onclick="navigate('contact');closeMobile()">Contact</a>
+</div>
+
+<!-- =============================== HOME PAGE =============================== -->
+<div class="page active" id="page-home">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-texture"></div>
+    <div class="hero-content">
+      <div>
+        <p class="hero-label">Welcome to your Safe Space</p>
+        <h1 class="hero-title">Safe Space<br><span>Where Healing<br>Begins</span></h1>
+        <p class="hero-sub">What if you had a space where you could just be… YOU. No labels. No pressure. Just a safe, non-judgemental, compassionate environment where your inner world is understood and your healing journey begins.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" onclick="navigate('contact')">Book a Session</a>
+          <a class="btn-outline" onclick="navigate('about')">Know More</a>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&q=80" alt="Therapy session"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- WELCOME -->
+  <section class="section welcome">
+    <div class="container">
+      <div class="welcome-grid">
+        <div class="welcome-img-wrap">
+          <img class="welcome-img" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&q=80" alt="Sameer Jangam"/>
+          <div class="welcome-badge"><span>10+</span><small>Years of Practice</small></div>
+        </div>
+        <div>
+          <p class="section-label">Welcome</p>
+          <h2 class="section-title">Welcome to your <em>Safe Space!</em></h2>
+          <div class="section-divider"></div>
+          <p class="section-body" style="margin-bottom:1.2rem">As children, we express our emotions freely, but as we grow, fear, expectations, and vulnerability often lead us to hide what we truly feel. Over time, we build defence mechanisms that protect us, yet can also hold us back.</p>
+          <p class="section-body" style="margin-bottom:1.2rem">Life's experiences shape who we are, and sometimes unresolved struggles continue to influence us without our awareness.</p>
+          <p class="section-body" style="margin-bottom:2rem">Through my work, I offer a warm, non-judgmental space where you can explore your thoughts and feelings openly. With a person-centred approach, I walk alongside you—helping you understand yourself, break unhelpful patterns, and move forward with clarity.</p>
+          <a class="btn-primary" onclick="navigate('about')">Know More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SAMEER -->
+  <section class="section" style="background:var(--warm-white)">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
+        <div>
+          <p class="section-label">Our Psychologist</p>
+          <h2 class="section-title">About <em>Sameer Jangam</em></h2>
+          <div class="section-divider"></div>
+          <p class="section-body">A Graduate Member of the British Psychological Society (GMBPSs) and an RCI-registered Clinical Psychologist (A), he specializes in clinical psychology, counselling, psychotherapy, training, and research. Trained at the University of York, UK, he focuses on evidence-based practices and impactful training programs. His work promotes mental wellbeing, resilience, and personal growth through counselling, facilitation, and experiential learning programs.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=700&q=80" alt="Clinical Psychologist" style="width:100%;height:400px;object-fit:cover;border-radius:12px"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section services">
+    <div class="container">
+      <p class="section-label">What We Offer</p>
+      <h2 class="section-title">What can we <em>help you with?</em></h2>
+      <div class="section-divider"></div>
+      <div class="services-grid">
+        <div class="service-card" onclick="navigate('assessments')">
+          <img src="https://images.unsplash.com/photo-1565378572977-b9c0b3a6c3de?w=600&q=80" alt="Psychological Assessments"/>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Psychological Assessments</h3>
+            <p class="service-card-text">Get an accurate evaluation of your personality and diagnosis through objective testing by a professional.</p>
+            <span class="service-card-link">Learn More →</span>
+          </div>
+        </div>
+        <div class="service-card" onclick="navigate('counseling')">
+          <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80" alt="Psychotherapy"/>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Psychotherapy & Counseling</h3>
+            <p class="service-card-text">Get a space to express your feelings where you will learn healthier coping mechanisms.</p>
+            <span class="service-card-link">Learn More →</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" alt="Self Awareness"/>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Building Self Awareness</h3>
+            <p class="service-card-text">Get to know some intriguing facts about yourself and enhance your knowledge.</p>
+            <span class="service-card-link">Learn More →</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&q=80" alt="Mental Health Wellbeing"/>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Mental Health Wellbeing</h3>
+            <p class="service-card-text">Learn to build a pleasant, meaningful and engaged life. Find your purpose and meaning.</p>
+            <span class="service-card-link">Learn More →</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Support Group"/>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Support Group</h3>
+            <p class="service-card-text">Find support with individuals sharing the same pain as yours. There is no greater bond than that.</p>
+            <span class="service-card-link">Learn More →</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80" alt="Workshops"/>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Workshops & Trainings</h3>
+            <p class="service-card-text">Learn and grow in the field of Psychology as a budding mental health professional.</p>
+            <span class="service-card-link">Learn More →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THERAPY PROCESS -->
+  <section class="section process">
+    <div class="container">
+      <p class="section-label">How It Works</p>
+      <h2 class="section-title">Effective Therapy <em>Process</em></h2>
+      <div class="section-divider" style="background:var(--sage-light)"></div>
+      <p style="color:rgba(255,255,255,.65);max-width:600px;line-height:1.8;font-size:.95rem">The process of effective therapy begins with building a strong rapport between the therapist and the client, creating a safe and trusting environment.</p>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Understanding Emotional Changes</h3>
+          <p class="step-text">As children, we express our feelings freely. But as we grow, we begin to hide emotions due to fear of judgment and the need to fit in.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <h3 class="step-title">Creating a Safe Space</h3>
+          <p class="step-text">A safe and welcoming space where you can share openly, feel heard, and receive support without judgment.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Exploring & Rediscovering Yourself</h3>
+          <p class="step-text">Helping you explore emotions, gain clarity, and reconnect with your inner strength and identity.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <h3 class="step-title">Taking the First Step Toward Healing</h3>
+          <p class="step-text">Healing begins with one step—giving yourself time, compassion, and a safe space to grow.</p>
+        </div>
+      </div>
+      <div class="therapy-list">
+        <div class="therapy-item"><h4>Build Client Rapport</h4><p>In the beginning of therapy, the therapist focuses on helping you feel comfortable and safe in the environment, building a genuine connection.</p></div>
+        <div class="therapy-item"><h4>Understand Patterns</h4><p>Once comfortable, the therapist wants to know more about you, your childhood, your past, your family and the thoughts you might be feeling.</p></div>
+        <div class="therapy-item"><h4>Provide Perspective</h4><p>The therapist will psycho-educate the explanations behind your patterns so that you can be consciously aware of them and their reasons.</p></div>
+        <div class="therapy-item"><h4>Set Goals Together</h4><p>Your therapist will help you identify unhealthy mechanisms and orient you to set a goal toward healthy mental health, tracking progress along the way.</p></div>
+        <div class="therapy-item"><h4>Equip You with Strategies</h4><p>Once you know what you are willing to work for, the therapist will help equip you with tools and strategies to reach your goal sooner.</p></div>
+        <div class="therapy-item"><h4>Help Them Recognize Little Wins</h4><p>Your therapist will also be your cheerleader to help you acknowledge and celebrate the little victories you achieve during the process.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOGS -->
+  <section class="section" style="background:var(--cream)">
+    <div class="container">
+      <p class="section-label">Latest Articles</p>
+      <h2 class="section-title">Our <em>Blogs</em></h2>
+      <div class="section-divider"></div>
+      <div class="blog-grid">
+        <div class="blog-card" onclick="navigate('resources')">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Mindfulness"/>
+          <div class="blog-card-body">
+            <p class="blog-tag">Mindfulness</p>
+            <h3 class="blog-card-title">The Benefits of Mindfulness and Meditation</h3>
+            <p class="blog-card-text">Mindfulness and meditation are powerful practices that help individuals focus on the present moment and…</p>
+            <span class="read-more">Read More</span>
+          </div>
+        </div>
+        <div class="blog-card" onclick="navigate('resources')">
+          <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=80" alt="Stress"/>
+          <div class="blog-card-body">
+            <p class="blog-tag">Stress Management</p>
+            <h3 class="blog-card-title">Effective Ways to Manage Stress in Everyday Life</h3>
+            <p class="blog-card-text">Stress is a natural and unavoidable part of life. It is the body's response to…</p>
+            <span class="read-more">Read More</span>
+          </div>
+        </div>
+        <div class="blog-card" onclick="navigate('resources')">
+          <img src="https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=600&q=80" alt="Anxiety"/>
+          <div class="blog-card-body">
+            <p class="blog-tag">Anxiety</p>
+            <h3 class="blog-card-title">Understanding Anxiety: Causes, Symptoms, and Coping Strategies</h3>
+            <p class="blog-card-text">Anxiety is a natural human response to stress, uncertainty, or perceived danger. It is the…</p>
+            <span class="read-more">Read More</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <h2>Book a Therapy Session and Begin Thriving</h2>
+    <p>Schedule your appointment now and start building the life you deserve.</p>
+    <a class="btn-white" onclick="navigate('contact')">Book a Session</a>
+  </div>
+</div>
+<!-- END HOME -->
+
+<!-- =============================== ABOUT PAGE =============================== -->
+<div class="page" id="page-about">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>About Safe Space</h1>
+      <p>Safe Space was created with a simple purpose: to provide a confidential, compassionate environment where anyone can seek support for their emotional wellbeing — without fear, stigma, or judgment.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <img class="about-sidebar-img" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80" alt="Sameer Jangam"/>
+        </div>
+        <div>
+          <p class="section-label">Our Founder</p>
+          <h2 class="section-title">About <em>Sameer Jangam</em></h2>
+          <div class="section-divider"></div>
+          <p class="section-body" style="margin-bottom:1rem">Sameer Jangam is a Graduate Member of the British Psychological Society (GMBPsS) and an RCI-registered Clinical Psychologist (A) dedicated to improving mental health and well-being. He specializes in Clinical Psychology, Counselling, Psychotherapy, Training, and Research, helping individuals achieve positive behavioural and emotional change.</p>
+          <p class="section-body" style="margin-bottom:2rem">He completed his postgraduation in Psychology from the University of York, U.K., where he developed strong expertise in research, ethics, critical thinking, and data analysis, building a strong foundation for evidence-based counselling and training practices.</p>
+
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--deep-green);margin-bottom:1.2rem;font-weight:400">Education</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem">
+            <li style="font-size:.9rem;color:var(--warm-gray);padding:.6rem 1rem;background:var(--soft-green);border-radius:6px">M.Sc. Psychology in Education – University of York, UK</li>
+            <li style="font-size:.9rem;color:var(--warm-gray);padding:.6rem 1rem;background:var(--soft-green);border-radius:6px">Post Graduate Diploma in Counselling – Tata Institute of Social Sciences, Mumbai</li>
+            <li style="font-size:.9rem;color:var(--warm-gray);padding:.6rem 1rem;background:var(--soft-green);border-radius:6px">Professional Diploma in Clinical Psychology – Amity University, Mumbai</li>
+          </ul>
+
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--deep-green);margin-bottom:1.2rem;font-weight:400">Professional Recognition</h3>
+          <div class="credential-grid">
+            <div class="credential-item"><h5>British Psychological Society (UK)</h5><p>Graduate Member</p></div>
+            <div class="credential-item"><h5>Rehabilitation Council of India (RCI)</h5><p>Registered Clinical Psychologist (A)</p></div>
+            <div class="credential-item"><h5>University of York (UK)</h5><p>Global Alumni</p></div>
+            <div class="credential-item"><h5>British Council (UK)</h5><p>UK Alumni Member</p></div>
+            <div class="credential-item"><h5>Tata Institute of Social Sciences</h5><p>Alumnus</p></div>
+            <div class="credential-item"><h5>Lions Club of India</h5><p>Chairperson – Mental Health & Well-being</p></div>
+          </div>
+
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--deep-green);margin:2rem 0 1rem;font-weight:400">Areas of Expertise</h3>
+          <div class="expertise-tags">
+            <span class="tag">Emotional Intelligence</span>
+            <span class="tag">Stress Management</span>
+            <span class="tag">Anger Management</span>
+            <span class="tag">Work-Life Balance</span>
+            <span class="tag">Productivity & Overthinking</span>
+            <span class="tag">Communication Skills</span>
+            <span class="tag">Team Building</span>
+            <span class="tag">Leadership Development</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="section" style="background:var(--cream)">
+    <div class="container">
+      <p class="section-label">Academic Contributions</p>
+      <h2 class="section-title">Research <em>Work</em></h2>
+      <div class="section-divider"></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem">
+        <div class="research-card">
+          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80" alt="Research"/>
+          <div class="research-card-body"><h4>Academic Self-Concept & Growth Mindset</h4><p>Comparative research examining British and Indian students based on psychological constructs such as academic self-concept and growth.</p></div>
+        </div>
+        <div class="research-card">
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" alt="Student Wellbeing"/>
+          <div class="research-card-body"><h4>Student Challenges & Well-Being</h4><p>Investigating the challenges faced by students in areas such as study skills, mental health, emotional support, and overall well-being.</p></div>
+        </div>
+        <div class="research-card">
+          <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&q=80" alt="COVID Impact"/>
+          <div class="research-card-body"><h4>Impact of COVID-19 on Academic Studies</h4><p>Exploring how the COVID-19 pandemic affected students' academic experiences and learning environments in both countries.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cta-strip">
+    <h2>Ready to Begin Your Journey?</h2>
+    <p>Take the first step toward healing — book a session today.</p>
+    <a class="btn-white" onclick="navigate('contact')">Book a Session</a>
+  </div>
+</div>
+<!-- END ABOUT -->
+
+<!-- =============================== VISION PAGE =============================== -->
+<div class="page" id="page-vision">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>Our Vision</h1>
+      <p>Educating, empowering, and creating a world where mental health care is accessible to all.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="vision-grid">
+        <div class="vision-box">
+          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&q=80" alt="Our Vision"/>
+          <div class="vision-box-body">
+            <h3>Vision</h3>
+            <p style="font-size:.95rem;line-height:1.85;color:var(--warm-gray);margin-bottom:1rem"><strong style="color:var(--sage-dark)">EDUCATES</strong> the public about mental health issues, treatment, the process of therapy, and the differences between healthy and unhealthy therapy.</p>
+            <p style="font-size:.95rem;line-height:1.85;color:var(--warm-gray)"><strong style="color:var(--sage-dark)">CHALLENGES</strong> the myths, stereotypes, and stigmas surrounding mental health issues and treatment and preventing people from getting help.</p>
+          </div>
+        </div>
+        <div class="vision-box">
+          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=700&q=80" alt="Our Mission"/>
+          <div class="vision-box-body">
+            <h3>Mission</h3>
+            <p style="font-size:.95rem;line-height:1.85;color:var(--warm-gray)">We envision a world in which all people have access to information and treatment that can help them improve their mental and emotional health and achieve harmony, thus promoting healthier families and communities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- END VISION -->
+
+<!-- =============================== ETHICS PAGE =============================== -->
+<div class="page" id="page-ethics">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>Work Ethics</h1>
+      <p>The principles that guide every interaction, every session, and every decision we make.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="ethics-grid">
+        <div class="ethics-card">
+          <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&q=80" alt="Beneficence"/>
+          <div class="ethics-card-body">
+            <h4>Beneficence and Non-Maleficence</h4>
+            <p>I strive to protect the rights and welfare of those with whom I share professional relations. I aim to offer services which are free of biases, affiliations, and prejudices that might influence the quality of my work.</p>
+          </div>
+        </div>
+        <div class="ethics-card">
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80" alt="Fidelity"/>
+          <div class="ethics-card-body">
+            <h4>Fidelity and Responsibility</h4>
+            <p>I seek to cultivate a profession and a scientific community built on trust, accountability, and ethical considerations for all individuals. I recognize my moral responsibility towards the community and aim to work towards the betterment of the community.</p>
+          </div>
+        </div>
+        <div class="ethics-card">
+          <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80" alt="Integrity"/>
+          <div class="ethics-card-body">
+            <h4>Integrity</h4>
+            <p>I do not keep the intentions to deceive or misrepresent during the conduct of my services. I strive to provide transparency and honesty in my practice.</p>
+          </div>
+        </div>
+        <div class="ethics-card">
+          <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=600&q=80" alt="Justice"/>
+          <div class="ethics-card-body">
+            <h4>Justice</h4>
+            <p>I hold the responsibility to be fair and impartial. I am aware of my areas of competence and limitations. I aim to practice within the areas of my expertise. I strive to treat all my clients equally and impartially.</p>
+          </div>
+        </div>
+        <div class="ethics-card">
+          <img src="https://images.unsplash.com/photo-1573164574511-73c773193279?w=600&q=80" alt="Respect"/>
+          <div class="ethics-card-body">
+            <h4>Respect for People's Rights and Dignity</h4>
+            <p>I respect the right to privacy, dignity, and confidentiality of all the individuals I am professionally associated with. I may sometimes break confidentiality under exceptional circumstances when there is presence of threat to client or others.</p>
+          </div>
+        </div>
+        <div class="ethics-card">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80" alt="Excellence"/>
+          <div class="ethics-card-body">
+            <h4>Professional Excellence</h4>
+            <p>I commit to ongoing learning, self-reflection, and professional development to ensure that the care I provide remains current, effective, and grounded in evidence-based practice.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- END ETHICS -->
+
+<!-- =============================== FACILITIES PAGE =============================== -->
+<div class="page" id="page-facilities">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>Facilities</h1>
+      <p>Everything You Need, All in One Place.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Our Services</p>
+      <h2 class="section-title">Our <em>Facilities</em></h2>
+      <div class="section-divider"></div>
+      <p class="section-body" style="margin-bottom:1.2rem">We provide a safe, confidential, and supportive environment where individuals can openly express their thoughts and emotions. Our services include professional counselling, psychotherapy sessions, mental health assessments, and behavior training programs designed to promote emotional well-being.</p>
+      <p class="section-body" style="margin-bottom:3rem">Our facilities are designed to create a safe, comfortable, and confidential environment where individuals can openly discuss their thoughts, emotions, and personal challenges. With evidence-based practices and personalized guidance, we help individuals develop resilience, improve mental health, and achieve personal and professional growth.</p>
+      <div class="facility-cards">
+        <div class="facility-card" onclick="navigate('counseling')">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=80" alt="Psychotherapy"/>
+          <div class="facility-card-body">
+            <h3>Psychotherapy & Counseling</h3>
+            <p>We offer psychotherapy and counselling to support individuals facing a variety of emotional and mental health concerns in a safe, confidential, and non-judgmental space.</p>
+            <button class="facility-cta" onclick="navigate('counseling')">Know More</button>
+          </div>
+        </div>
+        <div class="facility-card" onclick="navigate('assessments')">
+          <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=700&q=80" alt="Assessments"/>
+          <div class="facility-card-body">
+            <h3>Psychological Assessments</h3>
+            <p>Standardized, reliable, and scientifically validated psychological assessments that help provide an accurate and comprehensive evaluation of your concerns.</p>
+            <button class="facility-cta" onclick="navigate('assessments')">Know More</button>
+          </div>
+        </div>
+        <div class="facility-card" onclick="navigate('interventions')">
+          <img src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=700&q=80" alt="Interventions"/>
+          <div class="facility-card-body">
+            <h3>Therapeutic Interventions</h3>
+            <p>Evidence-based therapeutic techniques including CBT, DBT, ACT, and more to support healing, improve coping skills, and promote overall mental well-being.</p>
+            <button class="facility-cta" onclick="navigate('interventions')">Know More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cta-strip">
+    <h2>Begin Your Healing Journey Today</h2>
+    <p>Our team is ready to support you. Book a session at your convenience.</p>
+    <a class="btn-white" onclick="navigate('contact')">Book a Session</a>
+  </div>
+</div>
+<!-- END FACILITIES -->
+
+<!-- =============================== ASSESSMENTS PAGE =============================== -->
+<div class="page" id="page-assessments">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>Psychological Assessments</h1>
+      <p>Life can sometimes feel heavy — and navigating it alone can make it heavier still. Understanding your personality and mental well-being requires standardized, reliable, and scientifically validated psychological assessments.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:4rem">
+        <div>
+          <p class="section-label">Professional Evaluation</p>
+          <h2 class="section-title">Psychological <em>Assessments</em></h2>
+          <div class="section-divider"></div>
+          <p class="section-body" style="margin-bottom:1rem">Browsing the internet can sometimes lead us to self-diagnose our mental health concerns. But how accurate are these diagnoses? Most of the time, they are not.</p>
+          <p class="section-body" style="margin-bottom:1rem">Understanding your personality and mental well-being requires standardized, reliable, and scientifically validated psychological assessments. These assessments help provide an accurate and comprehensive evaluation of your concerns.</p>
+          <p class="section-body">The process begins with an intake session, where we take the time to understand your experiences and concerns in depth. An early and accurate assessment helps in identifying the root of the concern, allowing for timely and effective support and treatment.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=700&q=80" alt="Assessment" style="width:100%;height:400px;object-fit:cover;border-radius:12px"/>
+      </div>
+
+      <p class="section-label">Types of Assessments</p>
+      <h2 class="section-title">Assessment <em>Types</em></h2>
+      <div class="assess-grid">
+        <div class="assess-card">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80" alt="Personality"/>
+          <h4>Personality Assessments</h4>
+          <p>Helps understand personality traits, behavior patterns, and emotional responses. Provides insights for personal growth, relationships, and therapy planning.</p>
+        </div>
+        <div class="assess-card">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&q=80" alt="Learning Disability"/>
+          <h4>Specific Learning Disability Assessments</h4>
+          <p>Identifies learning difficulties in reading, writing, spelling, or mathematics. Helps detect conditions like dyslexia and provides support for academic improvement.</p>
+        </div>
+        <div class="assess-card">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80" alt="Couples"/>
+          <h4>Couples and Family Assessments</h4>
+          <p>Evaluates relationship dynamics, communication patterns, and conflicts. Helps couples and families build healthier and stronger relationships.</p>
+        </div>
+        <div class="assess-card">
+          <img src="https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?w=500&q=80" alt="Intellectual"/>
+          <h4>Intellectual Assessments</h4>
+          <p>Measures cognitive abilities like reasoning, memory, and problem-solving. Helps understand intellectual strengths and learning capacities.</p>
+        </div>
+        <div class="assess-card">
+          <img src="https://images.unsplash.com/photo-1566004100631-35d015d6a491?w=500&q=80" alt="Developmental"/>
+          <h4>Developmental Assessments</h4>
+          <p>Evaluates a child's developmental milestones and overall growth. Helps identify developmental delays and ensures early support.</p>
+        </div>
+        <div class="assess-card">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&q=80" alt="Corporate"/>
+          <h4>Corporate Assessments</h4>
+          <p>Psychological assessments for corporate help evaluate employee behavior, personality, and cognitive abilities. They support better hiring decisions and workplace productivity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cta-strip">
+    <h2>Get an Accurate Assessment Today</h2>
+    <p>Take the first step towards understanding yourself better.</p>
+    <a class="btn-white" onclick="navigate('contact')">Book a Session</a>
+  </div>
+</div>
+<!-- END ASSESSMENTS -->
+
+<!-- =============================== COUNSELING PAGE =============================== -->
+<div class="page" id="page-counseling">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>Psychotherapy & Counselling</h1>
+      <p>Psychotherapy is a structured, evidence-based process that helps address emotional and mental health concerns such as anxiety, depression, trauma, and grief.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:4rem">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=80" alt="Counseling" style="width:100%;height:420px;object-fit:cover;border-radius:12px"/>
+        <div>
+          <p class="section-label">Our Approach</p>
+          <h2 class="section-title">Psychotherapy & <em>Counselling</em></h2>
+          <div class="section-divider"></div>
+          <p class="section-body" style="margin-bottom:1rem">We offer psychotherapy and counselling to support individuals facing a variety of emotional and mental health concerns.</p>
+          <p class="section-body" style="margin-bottom:1rem">Psychotherapy focuses on understanding your thoughts, feelings, and behavior patterns that may be affecting your well-being. During the sessions, the therapist works collaboratively with you to explore these patterns and help you develop healthier ways of coping and responding to life's challenges.</p>
+          <p class="section-body">Most importantly, therapy provides a safe, confidential, and non-judgmental space where you can openly share your feelings and experiences, knowing that you are being heard with empathy and understanding.</p>
+        </div>
+      </div>
+
+      <p class="section-label">Areas We Address</p>
+      <h2 class="section-title">Conditions We <em>Support</em></h2>
+      <div class="section-divider"></div>
+      <div class="conditions-grid">
+        <div class="condition-pill"><h5>Depression</h5><p>Persistent feelings of sadness, loss of interest, and low energy that affect daily life.</p></div>
+        <div class="condition-pill"><h5>Anxiety</h5><p>Excessive worry, fear, or nervousness that can interfere with everyday activities.</p></div>
+        <div class="condition-pill"><h5>Phobia</h5><p>Intense and irrational fears of specific situations, objects, or activities.</p></div>
+        <div class="condition-pill"><h5>OCD</h5><p>Unwanted thoughts (obsessions) and repetitive behaviors (compulsions).</p></div>
+        <div class="condition-pill"><h5>Psychosis</h5><p>Difficulty distinguishing between reality and thoughts, including hallucinations.</p></div>
+        <div class="condition-pill"><h5>Psychosomatic Concerns</h5><p>Physical symptoms caused or worsened by emotional stress.</p></div>
+        <div class="condition-pill"><h5>Sleep Disturbances</h5><p>Insomnia, irregular sleep patterns, or difficulty staying asleep.</p></div>
+        <div class="condition-pill"><h5>Relational Disturbances</h5><p>Communication issues, misunderstandings, or emotional conflicts in relationships.</p></div>
+        <div class="condition-pill"><h5>Personality Disorder</h5><p>Long-term patterns of thinking and behavior that affect relationships and functioning.</p></div>
+        <div class="condition-pill"><h5>Trauma & Grief</h5><p>Processing distressing events or loss in a safe, supportive environment.</p></div>
+        <div class="condition-pill"><h5>Stress Management</h5><p>Learning techniques to manage work, relationship, or daily life stress effectively.</p></div>
+        <div class="condition-pill"><h5>Substance Addiction</h5><p>Support for understanding triggers and building healthier habits and recovery.</p></div>
+      </div>
+    </div>
+  </section>
+  <div class="cta-strip">
+    <h2>You Don't Have to Navigate This Alone</h2>
+    <p>Reach out and take the first step toward healing today.</p>
+    <a class="btn-white" onclick="navigate('contact')">Book a Session</a>
+  </div>
+</div>
+<!-- END COUNSELING -->
+
+<!-- =============================== INTERVENTIONS PAGE =============================== -->
+<div class="page" id="page-interventions">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>Therapeutic Interventions</h1>
+      <p>Therapeutic interventions are techniques used by mental health professionals to help individuals manage emotional, psychological, or behavioral difficulties.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="interventions-list">
+        <div class="intervention-item">
+          <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=700&q=80" alt="Supportive Therapy"/>
+          <div class="intervention-body"><h3>Supportive Therapy</h3><p>A therapeutic approach that provides emotional support, reassurance, and guidance to help individuals cope with stress and life challenges. It focuses on strengthening a person's existing coping abilities.</p></div>
+        </div>
+        <div class="intervention-item reverse">
+          <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=700&q=80" alt="CBT"/>
+          <div class="intervention-body"><h3>Cognitive Behaviour Therapy (CBT)</h3><p>A structured therapy that helps individuals identify and change negative thoughts and behaviors. It focuses on developing healthier thinking patterns and coping strategies to improve emotional well-being.</p></div>
+        </div>
+        <div class="intervention-item">
+          <img src="https://images.unsplash.com/photo-1573164574511-73c773193279?w=700&q=80" alt="REBT"/>
+          <div class="intervention-body"><h3>Rational Emotive Behaviour Therapy (REBT)</h3><p>A form of therapy that helps people identify irrational beliefs and replace them with more rational, positive thoughts. It aims to improve emotional well-being and behavior.</p></div>
+        </div>
+        <div class="intervention-item reverse">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80" alt="DBT"/>
+          <div class="intervention-body"><h3>Dialectical Behaviour Therapy (DBT)</h3><p>A therapy that helps individuals manage intense emotions and improve relationships. It focuses on mindfulness, emotional regulation, distress tolerance, and interpersonal skills.</p></div>
+        </div>
+        <div class="intervention-item">
+          <img src="https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=700&q=80" alt="ACT"/>
+          <div class="intervention-body"><h3>Acceptance and Commitment Therapy (ACT)</h3><p>ACT encourages individuals to accept their thoughts and feelings instead of fighting them. It focuses on mindfulness and committing to actions that align with personal values.</p></div>
+        </div>
+        <div class="intervention-item reverse">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80" alt="Transactional Analysis"/>
+          <div class="intervention-body"><h3>Transactional Analysis</h3><p>A psychological approach that studies interactions between people to understand communication and behavior patterns. It helps individuals improve relationships and self-awareness.</p></div>
+        </div>
+        <div class="intervention-item">
+          <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=700&q=80" alt="Trauma Informed"/>
+          <div class="intervention-body"><h3>Trauma-Informed Care</h3><p>An approach that recognizes the impact of trauma on a person's life and mental health. It focuses on creating a safe, supportive environment that promotes healing and recovery.</p></div>
+        </div>
+        <div class="intervention-item reverse">
+          <img src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=700&q=80" alt="Positive Psychology"/>
+          <div class="intervention-body"><h3>Positive Psychology</h3><p>A field of psychology that focuses on strengths, happiness, and well-being. It encourages individuals to build positive emotions, resilience, and meaningful life experiences.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cta-strip">
+    <h2>Find the Right Approach for You</h2>
+    <p>Our therapist will guide you to the most effective intervention for your needs.</p>
+    <a class="btn-white" onclick="navigate('contact')">Book a Session</a>
+  </div>
+</div>
+<!-- END INTERVENTIONS -->
+
+<!-- =============================== RESOURCES PAGE =============================== -->
+<div class="page" id="page-resources">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>Resources</h1>
+      <p>Explore Resources for Mental Health and Personal Growth</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Articles & Insights</p>
+      <h2 class="section-title">Our <em>Blogs</em></h2>
+      <div class="section-divider"></div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Mindfulness"/>
+          <div class="blog-card-body">
+            <p class="blog-tag">Mindfulness</p>
+            <h3 class="blog-card-title">The Benefits of Mindfulness and Meditation</h3>
+            <p class="blog-card-text">Mindfulness and meditation are powerful practices that help individuals focus on the present moment and cultivate awareness of their thoughts and feelings.</p>
+            <span class="read-more">Read More</span>
+          </div>
+        </div>
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=80" alt="Stress"/>
+          <div class="blog-card-body">
+            <p class="blog-tag">Stress Management</p>
+            <h3 class="blog-card-title">Effective Ways to Manage Stress in Everyday Life</h3>
+            <p class="blog-card-text">Stress is a natural and unavoidable part of life. It is the body's response to demands and challenges, but chronic stress can be harmful.</p>
+            <span class="read-more">Read More</span>
+          </div>
+        </div>
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=600&q=80" alt="Anxiety"/>
+          <div class="blog-card-body">
+            <p class="blog-tag">Anxiety</p>
+            <h3 class="blog-card-title">Understanding Anxiety: Causes, Symptoms, and Coping Strategies</h3>
+            <p class="blog-card-text">Anxiety is a natural human response to stress, uncertainty, or perceived danger. It is the body's alarm system designed to protect us.</p>
+            <span class="read-more">Read More</span>
+          </div>
+        </div>
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1541199249251-f713e6145474?w=600&q=80" alt="Mind"/>
+          <div class="blog-card-body">
+            <p class="blog-tag">Mental Health</p>
+            <h3 class="blog-card-title">War with One's Mind</h3>
+            <p class="blog-card-text">It is not that they did not try. They tried very hard. This piece explores the invisible battles we face within ourselves.</p>
+            <span class="read-more">Read More</span>
+          </div>
+        </div>
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600&q=80" alt="Resilience"/>
+          <div class="blog-card-body">
+            <p class="blog-tag">Resilience</p>
+            <h3 class="blog-card-title">Building Emotional Resilience: How to Stay Strong During Tough Times</h3>
+            <p class="blog-card-text">Emotional resilience is the ability to adapt, recover, and remain strong in the face of adversity and life's inevitable challenges.</p>
+            <span class="read-more">Read More</span>
+          </div>
+        </div>
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1541199249251-f713e6145474?w=600&q=80" alt="Overthinking"/>
+          <div class="blog-card-body">
+            <p class="blog-tag">Mindset</p>
+            <h3 class="blog-card-title">Overcoming Overthinking and Negative Thoughts</h3>
+            <p class="blog-card-text">Overthinking is a common mental habit in which a person repeatedly analyzes situations, conversations, or decisions without reaching a resolution.</p>
+            <span class="read-more">Read More</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="background:var(--cream)">
+    <div class="container" style="max-width:800px">
+      <p class="section-label">Common Questions</p>
+      <h2 class="section-title" style="text-align:center">FAQs</h2>
+      <div class="section-divider" style="margin:1rem auto"></div>
+      <div class="faq-list">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">1. What challenges are you currently facing in your personal or emotional life?</div>
+          <div class="faq-a">Many individuals face challenges such as stress, anxiety, relationship issues, work pressure, or feelings of loneliness. Recognizing these challenges is the first step toward seeking appropriate support.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">2. How do you usually cope with stress or difficult emotions?</div>
+          <div class="faq-a">People cope through activities like talking to someone they trust, practicing mindfulness, exercising, or seeking professional support. Therapy can help you develop healthier and more effective coping strategies.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">3. What motivated you to seek therapy or support at Safe Spaces?</div>
+          <div class="faq-a">The desire to improve mental well-being, find guidance, and have a safe environment to express thoughts and emotions motivates individuals to seek therapy.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">4. Do you feel comfortable talking about your thoughts and feelings with others?</div>
+          <div class="faq-a">Some people feel comfortable, while others find it difficult, which is why therapy provides a confidential and supportive space. We create an environment where you can gradually open up at your own pace.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">5. What kind of support are you hoping to receive from therapy?</div>
+          <div class="faq-a">Individuals often look for emotional support, coping strategies, guidance for personal growth, and help in managing stress or anxiety. Our therapist tailors each session to your specific needs and goals.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">6. What changes would you like to see in your mental and emotional well-being?</div>
+          <div class="faq-a">People often hope to feel more confident, emotionally balanced, less stressed, and better able to handle life's challenges. Setting clear goals helps make therapy more focused and effective.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-strip">
+    <h2>Book a Therapy Session and Begin Thriving</h2>
+    <p>Schedule your appointment now and start building the life you deserve.</p>
+    <a class="btn-white" onclick="navigate('contact')">Book a Session</a>
+  </div>
+</div>
+<!-- END RESOURCES -->
+
+<!-- =============================== OUTREACH PAGE =============================== -->
+<div class="page" id="page-outreach">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>Community Outreach</h1>
+      <p>Healing Doesn't Happen in Isolation. We believe mental wellness is a community effort.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Our Purpose</p>
+      <h2 class="section-title">Why Community Is at the <em>Heart of What We Do</em></h2>
+      <div class="section-divider"></div>
+      <p class="section-body" style="margin-bottom:3rem">Mental health care shouldn't be a privilege reserved for those who can seek it out. Too often, stigma, distance, or simply not knowing where to turn keeps people from getting the support they need. Our outreach initiatives bring compassionate, accessible support to every corner of the communities we serve — because no one should navigate their inner world alone.</p>
+      <div class="outreach-ways">
+        <div class="outreach-way">
+          <img src="https://images.unsplash.com/photo-1541199249251-f713e6145474?w=300&q=80" alt="Stepping Outside"/>
+          <h4>Stepping Outside</h4>
+          <p>We don't wait for people to come to us. We bring support directly to community halls, schools, and workplaces.</p>
+        </div>
+        <div class="outreach-way">
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=300&q=80" alt="Partnerships"/>
+          <h4>Local Partnerships</h4>
+          <p>We partner with local NGOs and neighborhood groups to make mental health conversations normal and accessible.</p>
+        </div>
+        <div class="outreach-way">
+          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=300&q=80" alt="Empowerment"/>
+          <h4>Empowerment</h4>
+          <p>Our commitment remains the same: show up, listen, and empower individuals to take charge of their wellness.</p>
+        </div>
+        <div class="outreach-way">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&q=80" alt="Community"/>
+          <h4>Breaking Silence</h4>
+          <p>We create safe and open spaces that encourage honest conversations about mental health in schools and communities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--cream)">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+        <div>
+          <p class="section-label">Awareness Campaigns</p>
+          <h2 class="section-title">Breaking the Silence: <em>Mental Health Awareness</em></h2>
+          <div class="section-divider"></div>
+          <p style="font-size:.95rem;line-height:1.8;color:var(--warm-gray);margin-bottom:1.5rem">Stigma often grows in silence, and we are committed to changing that. Through our ongoing awareness campaigns, we create safe and open spaces that encourage honest conversations about mental health in schools, workplaces, and public communities.</p>
+          <p style="font-size:.95rem;line-height:1.8;color:var(--warm-gray);margin-bottom:1.5rem">Our initiatives help individuals and families learn how to:</p>
+          <ul class="awareness-list">
+            <li>Recognise the signs of anxiety, depression, and burnout</li>
+            <li>Understand the difference between everyday stress and a mental health crisis</li>
+            <li>Support a loved one with care without overstepping personal boundaries</li>
+            <li>Encourage children to express their emotions in healthy and safe ways</li>
+            <li>Reduce the stigma and shame surrounding seeking professional therapy</li>
+          </ul>
+        </div>
+        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=700&q=80" alt="Community Outreach" style="width:100%;height:460px;object-fit:cover;border-radius:12px"/>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--deep-green);color:#fff">
+    <div class="container" style="text-align:center">
+      <p style="font-size:.72rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-light);margin-bottom:.8rem">Get Involved</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:#fff;font-weight:400;margin-bottom:1rem">Join the Movement — <em style="color:var(--sage-light)">Give Back, Grow Together</em></h2>
+      <p style="color:rgba(255,255,255,.7);max-width:580px;margin:0 auto 3rem;line-height:1.8">Outreach is not something we do to a community. It's something we do with one. We warmly welcome individuals and organisations who want to be part of the change.</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem">
+        <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:2rem 1.5rem">
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--sage-light);margin-bottom:.5rem">Volunteer</h4>
+          <p style="font-size:.85rem;color:rgba(255,255,255,.65)">As a counsellor or facilitator at events.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:2rem 1.5rem">
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--sage-light);margin-bottom:.5rem">Partner</h4>
+          <p style="font-size:.85rem;color:rgba(255,255,255,.65)">Join us as an NGO, school or community.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:2rem 1.5rem">
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--sage-light);margin-bottom:.5rem">Host</h4>
+          <p style="font-size:.85rem;color:rgba(255,255,255,.65)">Bring an outreach event to your premises.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:2rem 1.5rem">
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--sage-light);margin-bottom:.5rem">Spread</h4>
+          <p style="font-size:.85rem;color:rgba(255,255,255,.65)">Share our mission with your network.</p>
+        </div>
+      </div>
+      <div style="margin-top:3rem">
+        <p style="font-size:1.1rem;color:rgba(255,255,255,.8);margin-bottom:1.5rem">You Don't Have to Reach Out Alone. We'll Come to You.</p>
+        <a class="btn-primary" onclick="navigate('contact')" style="display:inline-block">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- END OUTREACH -->
+
+<!-- =============================== INSIGHTS PAGE =============================== -->
+<div class="page" id="page-insights">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>Insights</h1>
+      <p>Understanding the Mind, One Thought at a Time</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:4rem">
+        <img src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=700&q=80" alt="Insight" style="width:100%;height:420px;object-fit:cover;border-radius:12px"/>
+        <div>
+          <p class="section-label">Safe Space</p>
+          <h2 class="section-title">Insight & <em>Awareness</em></h2>
+          <div class="section-divider"></div>
+          <p class="section-body" style="margin-bottom:1rem">Insight is about developing a deeper understanding of your thoughts, emotions, and behaviours. It helps you recognise patterns, identify triggers, and become more aware of how your mind works.</p>
+          <p class="section-body">Through guided reflection and psychological awareness, insight allows individuals to make informed choices, improve emotional well-being, and build healthier relationships with themselves and others.</p>
+          <a class="btn-primary" style="margin-top:1.5rem;display:inline-block" onclick="navigate('about')">More About Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" style="background:var(--cream)">
+    <div class="container">
+      <p class="section-label">What Our Clients Say</p>
+      <h2 class="section-title">Client <em>Testimonials</em></h2>
+      <div class="section-divider"></div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">I feel grateful for being part of the sessions with Sameer Jangam. I was able to openly talk about my emotions and experiences in a space that felt safe and understanding. His approach helped me feel heard and supported. Through the process, I realised that many of my feelings were valid and normal, and that I am not alone in what I experience.</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">My experience with Sameer Jangam's therapy sessions was truly meaningful. The sessions helped me understand my emotions and thoughts more clearly. I was able to release a lot of stress and negativity that I had been carrying for a long time. I am thankful to Sameer for creating a comfortable space where I could reflect and focus on the brighter aspects of life.</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">I am truly grateful for the guidance I received from Sameer Jangam. The sessions gave me a safe space to express my thoughts and emotions without hesitation. His calm and understanding approach helped me feel heard and supported, and I slowly began to understand myself better.</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">The therapy sessions with Sameer Jangam were a very meaningful experience for me. I learned to understand my emotions and how they influence my behaviour. The environment felt comfortable and non-judgmental, which made it easier for me to open up and reflect on my life.</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">I would like to sincerely thank Sameer Jangam for his support and guidance. His sessions helped me gain clarity about many things I was struggling with. The discussions and activities during therapy helped me develop a healthier perspective toward my thoughts and feelings.</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">Working with Sameer Jangam helped me become more aware of my emotions and patterns. His thoughtful approach and patience made every session feel valuable. I now feel more confident in handling difficult situations and understanding myself better.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Our Gallery</p>
+      <h2 class="section-title">Gallery</h2>
+      <div class="section-divider"></div>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=600&q=80" alt="Gallery 1"/>
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80" alt="Gallery 2"/>
+        <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80" alt="Gallery 3"/>
+        <img src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=600&q=80" alt="Gallery 4"/>
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Gallery 5"/>
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Gallery 6"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS FAQ -->
+  <section class="section" style="background:var(--cream)">
+    <div class="container" style="max-width:800px">
+      <p class="section-label">Questions Answered</p>
+      <h2 class="section-title" style="text-align:center">Frequently Asked <em>Questions</em></h2>
+      <div class="section-divider" style="margin:1rem auto"></div>
+      <div class="faq-list">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">1. What is the difference between a clinical psychologist and a therapist?</div>
+          <div class="faq-a">A therapist or counsellor mainly provides counselling for emotional concerns like stress, relationships, or grief. A clinical psychologist has advanced training and can conduct psychological assessments, diagnose mental health conditions, and provide evidence-based treatment.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">2. Who should consult a clinical psychologist?</div>
+          <div class="faq-a">Anyone experiencing anxiety, depression, stress, trauma, or relationship difficulties can consult a clinical psychologist for professional support. You don't have to wait until things feel unbearable — early support is always beneficial.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">3. How can therapy help?</div>
+          <div class="faq-a">Therapy helps you understand your thoughts, emotions, and behaviors while developing healthier coping strategies for better well-being. It provides a safe space to explore challenges and work toward meaningful personal growth.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">4. Are therapy sessions confidential?</div>
+          <div class="faq-a">Yes, therapy sessions are completely confidential and provide a safe, non-judgmental space to share your concerns. Confidentiality may only be broken in exceptional circumstances where there is a serious risk of harm.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- END INSIGHTS -->
+
+<!-- =============================== CONTACT PAGE =============================== -->
+<div class="page" id="page-contact">
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>Contact Us</h1>
+      <p>We are here to support your journey toward well-being and growth. Reach out to us for consultations, training programs, research collaborations, or any service-related inquiries.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Get in Touch</h3>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <img src="https://cdn-icons-png.flaticon.com/512/455/455705.png" alt="phone"/>
+            </div>
+            <div>
+              <h5>Phone</h5>
+              <p>+91 74001 13567</p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="email"/>
+            </div>
+            <div>
+              <h5>Email</h5>
+              <p>sameerjangamyork@gmail.com</p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="location"/>
+            </div>
+            <div>
+              <h5>Vashi Location</h5>
+              <p>Manovikas Clinic 125, Arenja Arcade above Dominos Pizza, beside Kshirsagar Hotel, Liberty Housing Society, Sector 17, Navi Mumbai, Maharashtra 400703</p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="location"/>
+            </div>
+            <div>
+              <h5>Airoli Location 1</h5>
+              <p>1st Floor, Plot No. B – 21, Opposite Apple Hospital, Sector – 7, Navi Mumbai Maharashtra – 400701</p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="location"/>
+            </div>
+            <div>
+              <h5>Airoli Location 2</h5>
+              <p>Row House, U-124 & 125, Ramdas Swamy Marg, opp. Durga Mata Mandir Road, Sector 4, Navi Mumbai, Maharashtra 400708</p>
+            </div>
+          </div>
+
+          <h5 style="font-size:.75rem;font-weight:600;color:var(--sage);text-transform:uppercase;letter-spacing:.08em;margin-top:2rem;margin-bottom:1rem">Follow Us On Social</h5>
+          <div class="social-links">
+            <a href="https://www.facebook.com/sameer.jangam.54" target="_blank">f</a>
+            <a href="https://www.instagram.com/thesafespace.psych/" target="_blank">in</a>
+            <a href="https://www.linkedin.com/in/sameer-jangam-07114926/" target="_blank">li</a>
+            <a href="https://www.youtube.com/channel/UCOQL_4l-LjQIclQIWBS3NSg" target="_blank">yt</a>
+          </div>
+
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80" alt="Contact" style="width:100%;height:250px;object-fit:cover;border-radius:12px;margin-top:2rem"/>
+        </div>
+
+        <div>
+          <div class="contact-form">
+            <h3>Let's Connect</h3>
+            <div class="form-row">
+              <div class="form-group"><label>First Name</label><input type="text" placeholder="Your first name"/></div>
+              <div class="form-group"><label>Last Name</label><input type="text" placeholder="Your last name"/></div>
+            </div>
+            <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
+            <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX"/></div>
+            <div class="form-group">
+              <label>Service</label>
+              <select>
+                <option value="">Select a service...</option>
+                <option>Psychological Assessments</option>
+                <option>Psychotherapy & Counseling</option>
+                <option>Therapeutic Interventions</option>
+                <option>Workshops & Trainings</option>
+                <option>Community Outreach</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Message</label><textarea placeholder="Tell us a little about what brings you here..."></textarea></div>
+            <button class="btn-primary" style="width:100%;text-align:center">Send Message</button>
+          </div>
+          <div class="map-wrap" style="margin-top:2rem">
+            <iframe src="https://maps.google.com/maps?q=Vashi-Manovikas+Clinic+125,+Arenja+Arcade,+Sector+17,+Navi+Mumbai,+Maharashtra+400703&t=m&z=14&output=embed&iwloc=near" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- END CONTACT -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:#fff">Safe Spaces</div>
+      <p>We often learn to hide our emotions as we grow, building patterns that may hold us back. I offer a safe, non-judgmental space to help you understand yourself, heal, and move forward—because your mental health matters.</p>
+      <div class="social-links" style="margin-top:1.5rem">
+        <a href="https://www.facebook.com/sameer.jangam.54" target="_blank">f</a>
+        <a href="https://www.instagram.com/thesafespace.psych/" target="_blank">ig</a>
+        <a href="https://www.linkedin.com/in/sameer-jangam-07114926/" target="_blank">in</a>
+        <a href="https://www.youtube.com/channel/UCOQL_4l-LjQIclQIWBS3NSg" target="_blank">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Pages</h5>
+      <a onclick="navigate('home')">Home</a>
+      <a onclick="navigate('about')">About</a>
+      <a onclick="navigate('vision')">Our Vision</a>
+      <a onclick="navigate('ethics')">Work Ethics</a>
+      <a onclick="navigate('facilities')">Facilities</a>
+      <a onclick="navigate('resources')">Resources</a>
+      <a onclick="navigate('outreach')">Community Outreach</a>
+      <a onclick="navigate('insights')">Insights</a>
+      <a onclick="navigate('contact')">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Facilities</h5>
+      <a onclick="navigate('assessments')">Psychological Assessments</a>
+      <a onclick="navigate('counseling')">Psychotherapy & Counseling</a>
+      <a onclick="navigate('interventions')">Therapeutic Interventions</a>
+    </div>
+    <div class="footer-col footer-address">
+      <h5>Get in Touch</h5>
+      <p>Vashi- Manovikas Clinic 125, Arenja Arcade above Dominos Pizza, beside Kshirsagar Hotel, Liberty Housing Society, Sector 17, Navi Mumbai, Maharashtra 400703</p>
+      <p style="margin-top:.8rem">Airoli- 1st Floor, Plot No. B – 21, Opposite Apple Hospital, Sector – 7, Navi Mumbai Maharashtra – 400701</p>
+      <p style="margin-top:.8rem">Airoli- Row House, U-124 & 125, Ramdas Swamy Marg, opp. Durga Mata Mandir Road, Sector 4, Navi Mumbai, Maharashtra 400708</p>
+      <p style="margin-top:.8rem">sameerjangamyork@gmail.com</p>
+      <p>+91 74001 13567</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright © 2026 Safespace. All Rights Reserved.</p>
+    <p>Designed with care for mental wellbeing.</p>
+  </div>
+</footer>
+
+<script>
+  // ===== NAVIGATION =====
+  const pages = ['home','about','vision','ethics','facilities','assessments','counseling','interventions','resources','outreach','insights','contact'];
+
+  function navigate(page) {
+    pages.forEach(p => {
+      const el = document.getElementById('page-'+p);
+      if (el) el.classList.remove('active');
+      const nav = document.getElementById('nav-'+p);
+      if (nav) nav.classList.remove('active');
+    });
+    const target = document.getElementById('page-'+page);
+    if (target) { target.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+    // highlight nav
+    const navMap = {assessments:'facilities',counseling:'facilities',interventions:'facilities',vision:'about',ethics:'about'};
+    const navPage = navMap[page] || page;
+    const nav = document.getElementById('nav-'+navPage);
+    if (nav) nav.classList.add('active');
+  }
+
+  // Mobile menu
+  function toggleMobile() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // FAQ toggle
+  function toggleFaq(el) {
+    el.classList.toggle('open');
+  }
+
+  // Scroll shadow on nav
+  window.addEventListener('scroll',() => {
+    document.getElementById('mainNav').style.boxShadow = window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,.08)' : 'none';
+  });
+</script>
+</body>
+</html>
